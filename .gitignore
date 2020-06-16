@@ -1,0 +1,22 @@
+/vendor/
+composer.lock
+
+# IDE files
+.idea/*
+!.idea/codeStyles
+!.idea/fileTemplates
+!.idea/inspectionProfiles
+!.idea/symfony2.xml
+!.idea/php.xml
+!.idea/sqldialects.xml
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

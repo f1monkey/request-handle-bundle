@@ -1,0 +1,39 @@
+{
+    "name": "f1monkey/request-handle-bundle",
+    "description": "Common request deserialization and exception handling",
+    "type": "symfony-bundle",
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "symfony/http-kernel": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "symfony/validator": "^5.0",
+        "symfony/framework-bundle": "^5.0",
+        "symfony/translation": "^5.1",
+        "jms/serializer-bundle": "^3.6"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-asserts": "^1.2",
+        "codeception/module-phpbrowser": "^1.0",
+        "codeception/module-symfony": "^1.1",
+        "codeception/module-cli": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cyradin",
+            "email": "cyradin@protonmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "F1Monkey\\RequestHandleBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "F1Monkey\\RequestHandleBundle\\Tests\\": "tests"
+        }
+    }
+}
