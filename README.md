@@ -7,16 +7,31 @@ to validate request. Returns HTTP 400 response on validation error
 * [ExceptionListener](src/EventListener/ExceptionListener.php) to handle application exceptions and transform them to HTTP errors
 * [ExceptionLogListener](src/EventListener/ExceptionListener.php) to log application exceptions
 
+### Installation
+
+```bash
+$ composer require f1monkey/request-handle-bundle
+```
+Add to `config/bundles.php`:
+```php
+<?php
+return [
+    // ...
+    F1Monkey\RequestHandleBundle\RequestHandleBundle::class => ['all' => true],
+];
+```
+Create config file (i.e. `config/packages/request_handle.yaml`)
+
 ### Configuration
 
 ```yaml
 request_handle:
     value_resolver:
         # controller arguments implementing this interface will be deserialized using RequestDeserializationValueResolver
-        request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+        request_class: App\Model\RequestInterface
     request_validator:
         # controller arguments implementing this interface will be deserialized using RequestValidationListener
-        request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+        request_class: App\Model\RequestInterface
     exception_log:
         # logger service id for exception logging (default value = @logger)
         logger: 'logger'
