@@ -19,13 +19,13 @@ interface LogContextProviderInterface
      *
      * @return string
      */
-    public function getLogLevel(Throwable $exception, Request $request = null): string;
+    public function getLogLevel(Throwable $exception, Request $request): string;
 
     /**
      * @param Throwable    $exception
-     * @param Request|null $request
+     * @param Request $request
      *
      * @return array
      */
-    public function getLogContext(Throwable $exception, Request $request = null): array;
+    public function getLogContext(Throwable $exception, Request $request): array;
 }

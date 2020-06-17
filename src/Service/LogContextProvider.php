@@ -21,7 +21,7 @@ class LogContextProvider implements LogContextProviderInterface
      *
      * @return string
      */
-    public function getLogLevel(Throwable $exception, Request $request = null): string
+    public function getLogLevel(Throwable $exception, Request $request): string
     {
         if ($exception instanceof HttpExceptionInterface) {
             return LogLevel::INFO;
@@ -32,18 +32,22 @@ class LogContextProvider implements LogContextProviderInterface
 
     /**
      * @param Throwable $exception
-     * @param Request|null   $request
+     * @param Request   $request
      *
      * @return array
      */
-    public function getLogContext(Throwable $exception, Request $request = null): array
+    public function getLogContext(Throwable $exception, Request $request): array
     {
-        if ($exception instanceof HttpExceptionInterface) {
-            return [];
+        $context = [
+            'url'   => $request->getPathInfo(),
+            'route' => $request->attributes->get('_controller'),
+        ];
+
+        if (!$exception instanceof HttpExceptionInterface) {
+            $context['request'] = (string)$request;
+            $context['trace'] = $exception->getTrace();
         }
 
-        return [
-            'trace' => $exception->getTrace(),
-        ];
+        return $context;
     }
 }
