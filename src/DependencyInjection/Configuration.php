@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
         $rootNode    = $treeBuilder->getRootNode()->children();
         $this->addValueResolverSettings($rootNode);
         $this->addRequestValidatorSettings($rootNode);
+        $this->addExceptionLogSettings($rootNode);
         $rootNode->end();
 
         return $treeBuilder;
@@ -34,10 +35,11 @@ class Configuration implements ConfigurationInterface
      */
     protected function addValueResolverSettings(NodeBuilder $node)
     {
-        $node->arrayNode('value_resolver')
-             ->isRequired()
-             ->children()
-                ->scalarNode('supported_class')
+        $node
+            ->arrayNode('value_resolver')
+            ->isRequired()
+            ->children()
+                ->scalarNode('request_class')
                     ->cannotBeEmpty()
                     ->isRequired()
                 ->end()
@@ -49,11 +51,28 @@ class Configuration implements ConfigurationInterface
      */
     protected function addRequestValidatorSettings(NodeBuilder $node)
     {
-        $node->arrayNode('request_validator')
-                ->isRequired()
-                    ->children()
-                    ->scalarNode('supported_class')
+        $node
+            ->arrayNode('request_validator')
+            ->isRequired()
+            ->children()
+                ->scalarNode('request_class')
                     ->cannotBeEmpty()
+                    ->isRequired()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * @param NodeBuilder $node
+     */
+    protected function addExceptionLogSettings(NodeBuilder $node)
+    {
+        $node
+            ->arrayNode('exception_log')
+            ->children()
+                ->scalarNode('logger')
+                    ->info('Logger service id (i.e. channel id)')
+                    ->defaultValue('logger')
                     ->isRequired()
                 ->end()
              ->end();

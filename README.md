@@ -17,6 +17,9 @@ request_handle:
     request_validator:
         # controller arguments implementing this interface will be deserialized using RequestValidationListener
         request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+    exception_log:
+        # logger service id for exception logging (default value = @logger)
+        logger: 'logger'
 ```
 
 ### ExceptionListener

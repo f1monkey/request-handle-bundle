@@ -34,6 +34,10 @@ class RequestHandleExtension extends Extension
         $this->processValueResolverConfig($container, $config['value_resolver']);
         $this->processRequestValidatorConfig($container, $config['request_validator']);
 
+        if (isset($config['exception_log'])) {
+            $this->processExceptionLogConfig($container, $config['exception_log']);
+        }
+
         $loader = new YamlFileLoader(
             $container, new FileLocator(__DIR__ . '/../Resources/config')
         );
@@ -46,7 +50,7 @@ class RequestHandleExtension extends Extension
      */
     protected function processValueResolverConfig(ContainerBuilder $container, array $config)
     {
-        $container->setParameter('f1monkey.request_handle.value_resolver.supported_class', $config['supported_class']);
+        $container->setParameter('f1monkey.request_handle.value_resolver.request_class', $config['request_class']);
     }
 
     /**
@@ -55,6 +59,15 @@ class RequestHandleExtension extends Extension
      */
     protected function processRequestValidatorConfig(ContainerBuilder $container, array $config)
     {
-        $container->setParameter('f1monkey.request_handle.request_validator.supported_class', $config['supported_class']);
+        $container->setParameter('f1monkey.request_handle.request_validator.request_class', $config['request_class']);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function processExceptionLogConfig(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('f1monkey.exception_log.logger', $config['logger']);
     }
 }

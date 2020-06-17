@@ -7,6 +7,8 @@ request_handle:
         request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
     request_validator:
         request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+    exception_log:
+        logger: 'logger'
 
 monolog:
     handlers:

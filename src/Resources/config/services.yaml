@@ -40,8 +40,6 @@ services:
 
     F1Monkey\RequestHandleBundle\EventListener\ExceptionLogListener:
         class: F1Monkey\RequestHandleBundle\EventListener\ExceptionLogListener
-        calls:
-            - ['setLogger', ['@logger']]
         arguments:
             $logContextProvider: '@F1Monkey\RequestHandleBundle\Service\LogContextProviderInterface'
         tags:
