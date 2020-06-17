@@ -1,0 +1,17 @@
+framework:
+    secret: 'test'
+    test: true
+
+request_handle:
+    value_resolver:
+        supported_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+    request_validator:
+        supported_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+
+services:
+    _defaults:
+        public: true
+
+    F1Monkey\RequestHandleBundle\Tests\functional\Mock\Controller:
+        class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\Controller
+        tags: ['controller.service_arguments']

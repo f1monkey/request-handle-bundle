@@ -20,3 +20,6 @@ composer.lock
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+# test microkernel container dumps and logs
+tests/functional/var

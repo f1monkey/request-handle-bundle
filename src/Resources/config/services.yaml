@@ -1,0 +1,44 @@
+services:
+    _defaults:
+        autowire: false
+
+    F1Monkey\RequestHandleBundle\Service\RequestDeserializerInterface:
+        class: F1Monkey\RequestHandleBundle\Service\JsonRequestDeserializer
+        arguments:
+            $arrayTransformer: '@jms_serializer'
+            $serializer: '@jms_serializer'
+
+    F1Monkey\RequestHandleBundle\Service\RequestValidatorInterface:
+        class: F1Monkey\RequestHandleBundle\Service\RequestValidator
+        arguments:
+            $validator: '@validator'
+
+    RequestDeserializationValueResolver:
+        class: F1Monkey\RequestHandleBundle\ArgumentValueResolver\RequestDeserializationValueResolver
+        arguments:
+            $requestDeserializer: '@F1Monkey\RequestHandleBundle\Service\RequestDeserializerInterface'
+            $supportedClass: '%f1monkey.request_handle.value_resolver.supported_class%'
+        tags:
+            - { name: 'controller.argument_value_resolver' }
+
+    F1Monkey\RequestHandleBundle\Factory\ErrorResponseFactoryInterface:
+        class: F1Monkey\RequestHandleBundle\Factory\JsonErrorResponseFactory
+        arguments:
+            $translator: '@translator'
+            $arrayTransformer: '@jms_serializer'
+
+    F1Monkey\RequestHandleBundle\EventListener\ExceptionListener:
+        class: F1Monkey\RequestHandleBundle\EventListener\ExceptionListener
+        arguments:
+            $errorResponseFactory: '@F1Monkey\RequestHandleBundle\Factory\ErrorResponseFactoryInterface'
+            $showExceptions: '%kernel.debug%'
+        tags:
+            - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::EXCEPTION }
+
+    F1Monkey\RequestHandleBundle\EventListener\RequestValidationListener:
+        class: F1Monkey\RequestHandleBundle\EventListener\RequestValidationListener
+        arguments:
+            $validator: '@F1Monkey\RequestHandleBundle\Service\RequestValidatorInterface'
+            $supportedClass: '%f1monkey.request_handle.request_validator.supported_class%'
+        tags:
+            - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::CONTROLLER_ARGUMENTS }

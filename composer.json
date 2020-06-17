@@ -10,14 +10,17 @@
         "symfony/validator": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/translation": "^5.1",
-        "jms/serializer-bundle": "^3.6"
+        "jms/serializer-bundle": "^3.6",
+        "doctrine/collections": "^1.6"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
         "codeception/module-asserts": "^1.2",
         "codeception/module-phpbrowser": "^1.0",
         "codeception/module-symfony": "^1.1",
-        "codeception/module-cli": "^1.0"
+        "codeception/module-cli": "^1.0",
+        "codeception/module-rest": "^1.2",
+        "symfony/yaml": "^5.1"
     },
     "license": "MIT",
     "authors": [

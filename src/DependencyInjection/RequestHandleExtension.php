@@ -30,12 +30,31 @@ class RequestHandleExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
 
-        /* @todo */
         $config = $processor->processConfiguration($configuration, $configs);
+        $this->processValueResolverConfig($container, $config['value_resolver']);
+        $this->processRequestValidatorConfig($container, $config['request_validator']);
 
         $loader = new YamlFileLoader(
             $container, new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('services.yaml');
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function processValueResolverConfig(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('f1monkey.request_handle.value_resolver.supported_class', $config['supported_class']);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function processRequestValidatorConfig(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('f1monkey.request_handle.request_validator.supported_class', $config['supported_class']);
     }
 }
