@@ -4,9 +4,16 @@ framework:
 
 request_handle:
     value_resolver:
-        supported_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+        request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
     request_validator:
-        supported_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+        request_class: F1Monkey\RequestHandleBundle\Tests\functional\Mock\RequestInterface
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
 
 services:
     _defaults:

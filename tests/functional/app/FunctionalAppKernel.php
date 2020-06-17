@@ -40,6 +40,7 @@ class FunctionalAppKernel extends Kernel
         return [
             new FrameworkBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Symfony\Bundle\MonologBundle\MonologBundle(),
             new F1Monkey\RequestHandleBundle\RequestHandleBundle(),
         ];
     }

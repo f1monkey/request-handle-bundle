@@ -17,7 +17,7 @@ services:
         class: F1Monkey\RequestHandleBundle\ArgumentValueResolver\RequestDeserializationValueResolver
         arguments:
             $requestDeserializer: '@F1Monkey\RequestHandleBundle\Service\RequestDeserializerInterface'
-            $supportedClass: '%f1monkey.request_handle.value_resolver.supported_class%'
+            $supportedClass: '%f1monkey.request_handle.value_resolver.request_class%'
         tags:
             - { name: 'controller.argument_value_resolver' }
 
@@ -27,6 +27,9 @@ services:
             $translator: '@translator'
             $arrayTransformer: '@jms_serializer'
 
+    F1Monkey\RequestHandleBundle\Service\LogContextProviderInterface:
+        class: F1Monkey\RequestHandleBundle\Service\LogContextProvider
+
     F1Monkey\RequestHandleBundle\EventListener\ExceptionListener:
         class: F1Monkey\RequestHandleBundle\EventListener\ExceptionListener
         arguments:
@@ -35,10 +38,19 @@ services:
         tags:
             - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::EXCEPTION }
 
+    F1Monkey\RequestHandleBundle\EventListener\ExceptionLogListener:
+        class: F1Monkey\RequestHandleBundle\EventListener\ExceptionLogListener
+        calls:
+            - ['setLogger', ['@logger']]
+        arguments:
+            $logContextProvider: '@F1Monkey\RequestHandleBundle\Service\LogContextProviderInterface'
+        tags:
+            - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::EXCEPTION, priority: 100 }
+
     F1Monkey\RequestHandleBundle\EventListener\RequestValidationListener:
         class: F1Monkey\RequestHandleBundle\EventListener\RequestValidationListener
         arguments:
             $validator: '@F1Monkey\RequestHandleBundle\Service\RequestValidatorInterface'
-            $supportedClass: '%f1monkey.request_handle.request_validator.supported_class%'
+            $supportedClass: '%f1monkey.request_handle.request_validator.request_class%'
         tags:
             - { name: 'kernel.event_listener', event: !php/const Symfony\Component\HttpKernel\KernelEvents::CONTROLLER_ARGUMENTS }
