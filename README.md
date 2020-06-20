@@ -1,7 +1,7 @@
 # RequestHandleBundle
 
 * [RequestDeserializationValueResolver](src/ArgumentValueResolver/RequestDeserializationValueResolver.php)
-argument value resolver to deserialize requires parameters using jms-serializer
+argument value resolver to deserialize request parameters using jms-serializer
 * [RequestValidationListener](src/EventListener/RequestValidationListener.php)
 to validate request. Returns HTTP 400 response on validation error
 * [ExceptionListener](src/EventListener/ExceptionListener.php) to handle application exceptions and transform them to HTTP errors
