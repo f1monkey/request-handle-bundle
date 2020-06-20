@@ -3,9 +3,17 @@ name: PHP
 on: [push, pull_request]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-
+    test:
+        name: Codeception (PHP ${{ matrix.php-versions }}) (${{ matrix.composer.name }} dependencies)
+        runs-on: ${{ matrix.operating-system }}
+        strategy:
+            fail-fast: false
+            matrix:
+                operating-system: [ubuntu-latest]
+                php-versions: ['7.4']
+                composer:
+                    - {name: "lowest", flags: " --prefer-dist --prefer-lowest"}
+                    - {name: "stable", flags: " --prefer-dist --prefer-stable"}
         steps:
             -   uses: actions/checkout@v2
 
@@ -25,5 +33,5 @@ jobs:
                 if: steps.composer-cache.outputs.cache-hit != 'true'
                 run: composer install --prefer-dist --no-progress --no-suggest
 
-            -   name: Run tests
-                uses: joelwmale/codeception-action@1.0.0
+            -   name: Codeception
+                run: vendor/bin/codecept run
