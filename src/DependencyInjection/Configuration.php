@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace F1Monkey\RequestHandleBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -21,10 +22,13 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('request_handle');
 
-        $rootNode    = $treeBuilder->getRootNode()->children();
-        $this->addValueResolverSettings($rootNode);
-        $this->addRequestValidatorSettings($rootNode);
-        $this->addExceptionLogSettings($rootNode);
+        /** @var ArrayNodeDefinition $rootNode */
+        $rootNode = $treeBuilder->getRootNode();
+        $root     = $rootNode->children();
+
+        $this->addValueResolverSettings($root);
+        $this->addRequestValidatorSettings($root);
+        $this->addExceptionLogSettings($root);
         $rootNode->end();
 
         return $treeBuilder;
@@ -33,8 +37,9 @@ class Configuration implements ConfigurationInterface
     /**
      * @param NodeBuilder $node
      */
-    protected function addValueResolverSettings(NodeBuilder $node)
+    protected function addValueResolverSettings(NodeBuilder $node): void
     {
+        // @phpstan-ignore-next-line
         $node
             ->arrayNode('value_resolver')
             ->isRequired()
@@ -49,8 +54,9 @@ class Configuration implements ConfigurationInterface
     /**
      * @param NodeBuilder $node
      */
-    protected function addRequestValidatorSettings(NodeBuilder $node)
+    protected function addRequestValidatorSettings(NodeBuilder $node): void
     {
+        // @phpstan-ignore-next-line
         $node
             ->arrayNode('request_validator')
             ->isRequired()
@@ -65,8 +71,9 @@ class Configuration implements ConfigurationInterface
     /**
      * @param NodeBuilder $node
      */
-    protected function addExceptionLogSettings(NodeBuilder $node)
+    protected function addExceptionLogSettings(NodeBuilder $node): void
     {
+        // @phpstan-ignore-next-line
         $node
             ->arrayNode('exception_log')
             ->children()

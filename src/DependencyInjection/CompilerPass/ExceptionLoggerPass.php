@@ -26,7 +26,7 @@ class ExceptionLoggerPass implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    protected function injectLogger(ContainerBuilder $container)
+    protected function injectLogger(ContainerBuilder $container): void
     {
         $listener = $container->getDefinition(ExceptionLogListener::class);
         foreach ($listener->getMethodCalls() as [$method, $arguments]) {

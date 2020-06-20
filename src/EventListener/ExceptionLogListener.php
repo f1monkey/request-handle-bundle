@@ -35,7 +35,7 @@ class ExceptionLogListener implements LoggerAwareInterface
     /**
      * @param ExceptionEvent $event
      */
-    public function onKernelException(ExceptionEvent $event)
+    public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
         $request   = $event->getRequest();

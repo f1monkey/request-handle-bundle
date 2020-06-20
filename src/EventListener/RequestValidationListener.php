@@ -6,6 +6,7 @@ namespace F1Monkey\RequestHandleBundle\EventListener;
 use F1Monkey\RequestHandleBundle\Exception\Validation\RequestValidationException;
 use F1Monkey\RequestHandleBundle\Service\RequestValidatorInterface;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
@@ -44,10 +45,10 @@ class RequestValidationListener
      */
     public function onKernelControllerArguments(ControllerArgumentsEvent $event): void
     {
-        /** @var ConstraintViolationListInterface|null $violations */
+        /** @var ConstraintViolationListInterface<ConstraintViolationInterface>|null $violations */
         $violations = null;
         foreach ($event->getArguments() as $argument) {
-            if (!is_a($argument, $this->supportedClass, true)) {
+            if (!is_a($argument, $this->supportedClass, true) || !is_object($argument)) {
                 continue;
             }
 
