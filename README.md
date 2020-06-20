@@ -30,7 +30,7 @@ request_handle:
         # controller arguments implementing this interface will be deserialized using RequestDeserializationValueResolver
         request_class: App\Model\RequestInterface
     request_validator:
-        # controller arguments implementing this interface will be deserialized using RequestValidationListener
+        # controller arguments implementing this interface will be validated using RequestValidationListener
         request_class: App\Model\RequestInterface
     exception_log:
         # logger service id for exception logging (default value = @logger)
