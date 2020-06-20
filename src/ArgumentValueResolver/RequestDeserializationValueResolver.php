@@ -6,6 +6,7 @@ namespace F1Monkey\RequestHandleBundle\ArgumentValueResolver;
 use F1Monkey\RequestHandleBundle\Exception\InvalidRequestBodyException;
 use F1Monkey\RequestHandleBundle\Service\RequestDeserializerInterface;
 use Generator;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
@@ -50,6 +51,10 @@ class RequestDeserializationValueResolver implements ArgumentValueResolverInterf
      */
     public function supports(Request $request, ArgumentMetadata $argument)
     {
+        if ($argument->getType() === null) {
+            return false;
+        }
+
         return is_a($argument->getType(), $this->supportedClass, true);
     }
 
@@ -65,6 +70,13 @@ class RequestDeserializationValueResolver implements ArgumentValueResolverInterf
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
-        yield $this->requestDeserializer->deserializeRequest($request, $argument->getType());
+        $argumentType = $argument->getType();
+        if ($argumentType === null) {
+            throw new InvalidArgumentException(
+                sprintf('Expected string, got "%s"', gettype($argumentType))
+            );
+        }
+
+        yield $this->requestDeserializer->deserializeRequest($request, $argumentType);
     }
 }

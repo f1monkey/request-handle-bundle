@@ -45,7 +45,6 @@ class JsonRequestDeserializer implements RequestDeserializerInterface
      *
      * @return object
      * @throws InvalidRequestBodyException
-     * @throws BadRequestException
      */
     public function deserializeRequest(Request $request, string $type): object
     {
@@ -53,6 +52,7 @@ class JsonRequestDeserializer implements RequestDeserializerInterface
             if ($request->isMethodSafe()) {
                 $result = $this->arrayTransformer->fromArray($request->query->all(), $type);
             } else {
+                // @phpstan-ignore-next-line
                 $result = $this->serializer->deserialize(
                     $request->getContent(),
                     $type,
@@ -61,7 +61,7 @@ class JsonRequestDeserializer implements RequestDeserializerInterface
             }
 
             return $result;
-        } catch (JMSRuntimeException $e) {
+        } /** @noinspection PhpRedundantCatchClauseInspection */ catch (JMSRuntimeException $e) {
             throw new InvalidRequestBodyException($e->getMessage());
         }
     }

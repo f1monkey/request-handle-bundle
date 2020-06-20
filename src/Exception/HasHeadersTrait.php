@@ -11,12 +11,12 @@ namespace F1Monkey\RequestHandleBundle\Exception;
 trait HasHeadersTrait
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected array $headers = [];
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getHeaders(): array
     {

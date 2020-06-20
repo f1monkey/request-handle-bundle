@@ -9,6 +9,7 @@ use F1Monkey\RequestHandleBundle\Exception\UserFriendlyExceptionInterface;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Throwable;
 
@@ -29,10 +30,10 @@ class RequestValidationException extends RuntimeException implements
     /**
      * RequestValidationException constructor.
      *
-     * @param ConstraintViolationListInterface $violations
-     * @param string                           $message
-     * @param int                              $code
-     * @param Throwable|null                   $previous
+     * @param ConstraintViolationListInterface<ConstraintViolationInterface> $violations
+     * @param string                                                         $message
+     * @param int                                                            $code
+     * @param Throwable|null                                                 $previous
      */
     public function __construct(
         ConstraintViolationListInterface $violations,

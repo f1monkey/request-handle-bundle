@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace F1Monkey\RequestHandleBundle\Exception\Validation;
 
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
@@ -13,12 +14,12 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 trait HasViolationsTrait
 {
     /**
-     * @var ConstraintViolationListInterface
+     * @var ConstraintViolationListInterface<ConstraintViolationInterface>
      */
     protected ConstraintViolationListInterface $violations;
 
     /**
-     * @return ConstraintViolationListInterface
+     * @return ConstraintViolationListInterface<ConstraintViolationInterface>
      */
     public function getViolations(): ConstraintViolationListInterface
     {

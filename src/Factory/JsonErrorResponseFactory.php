@@ -88,7 +88,7 @@ class JsonErrorResponseFactory implements ErrorResponseFactoryInterface
     /**
      * @param Throwable $exception
      *
-     * @return Collection|ErrorResponseError[]|null
+     * @return Collection<int, ErrorResponseError>|null
      */
     protected function getRequestErrors(Throwable $exception): ?Collection
     {

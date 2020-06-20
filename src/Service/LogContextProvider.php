@@ -34,7 +34,7 @@ class LogContextProvider implements LogContextProviderInterface
      * @param Throwable $exception
      * @param Request   $request
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getLogContext(Throwable $exception, Request $request): array
     {
@@ -45,7 +45,7 @@ class LogContextProvider implements LogContextProviderInterface
 
         if (!$exception instanceof HttpExceptionInterface) {
             $context['request'] = (string)$request;
-            $context['trace'] = $exception->getTrace();
+            $context['trace']   = $exception->getTrace();
         }
 
         return $context;

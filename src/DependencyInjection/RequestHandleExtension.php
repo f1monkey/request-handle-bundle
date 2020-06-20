@@ -20,14 +20,14 @@ class RequestHandleExtension extends Extension
     /**
      * Loads a specific configuration.
      *
-     * @param array            $configs
-     * @param ContainerBuilder $container
+     * @param array<string, mixed> $configs
+     * @param ContainerBuilder     $container
      *
      * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $processor = new Processor();
+        $processor     = new Processor();
         $configuration = new Configuration();
 
         $config = $processor->processConfiguration($configuration, $configs);
@@ -45,28 +45,28 @@ class RequestHandleExtension extends Extension
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param array            $config
+     * @param ContainerBuilder     $container
+     * @param array<string, mixed> $config
      */
-    protected function processValueResolverConfig(ContainerBuilder $container, array $config)
+    protected function processValueResolverConfig(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('f1monkey.request_handle.value_resolver.request_class', $config['request_class']);
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param array            $config
+     * @param ContainerBuilder     $container
+     * @param array<string, mixed> $config
      */
-    protected function processRequestValidatorConfig(ContainerBuilder $container, array $config)
+    protected function processRequestValidatorConfig(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('f1monkey.request_handle.request_validator.request_class', $config['request_class']);
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param array            $config
+     * @param ContainerBuilder     $container
+     * @param array<string, mixed> $config
      */
-    protected function processExceptionLogConfig(ContainerBuilder $container, array $config)
+    protected function processExceptionLogConfig(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('f1monkey.exception_log.logger', $config['logger']);
     }
