@@ -1,4 +1,5 @@
 # RequestHandleBundle
+![](https://github.com/f1monkey/request-handle-bundle/workflows/Tests/badge.svg)![](https://img.shields.io/github/v/tag/f1monkey/request-handle-bundle)
 
 * [RequestDeserializationValueResolver](src/ArgumentValueResolver/RequestDeserializationValueResolver.php)
 argument value resolver to deserialize request parameters using jms-serializer
