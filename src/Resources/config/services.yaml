@@ -1,3 +1,6 @@
+parameters:
+    f1monkey.request_handle.regex.uuid: '([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}'
+
 services:
     _defaults:
         autowire: false
