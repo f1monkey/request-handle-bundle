@@ -1,3 +1,12 @@
+# 1.1.0 (2020-06-30)
+
+
+### Features
+
+* Add container parameter with uuid regexp ([516a41a](https://github.com/f1monkey/request-handle-bundle/commit/516a41aa284c6ee4f56ba525380e3ca11e70a517))
+
+
+
 # 1.0.2 (2020-06-29)
 
 
